@@ -1,3 +1,6 @@
+// Nikolas Lennon
+// Copyright 2017
+
 #include <iostream>
 #include <string>
 #include "tstack.h"
