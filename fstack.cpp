@@ -13,18 +13,20 @@ void CopyTest(Stack stack);
 template <typename Stack>
 void AssignTest(const Stack& stack);
 
+
+//choose one of these for the stack API
 typedef int ElementType;
 //typedef char ElementType;
-//typedef std::string ElementType;
 
 const size_t maxSize = 100;
 
 typedef fsu::Stack<ElementType, maxSize> StackType;
 
 int main() {
-	//ElementType fill = "*";
-	//ElementType fill = '*';
-	ElementType fill = 0;
+	
+	//choose one of these fills for the type of "typdef" chosen above
+	//ElementType fill = "*"; //char fill
+	ElementType fill = 0; //int fill
 
 	char selection;
 	StackType stack(fill, 100);
