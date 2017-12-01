@@ -60,7 +60,7 @@ int main() {
 				break;
 			case '-': case '2':
 				if (stack.Size() == 0) {
-					std::cout << "** Stack error: Pop() called on an Empty Stack\n";
+					std::cerr << "** Stack error: Pop() called on an Empty Stack\n";
 				}
 				else {
 					stack.Pop();
@@ -74,7 +74,7 @@ int main() {
 					std::cout << "Top of Stack: " << stack.Top() << "\n";
 				}
 				else {
-					std::cout << "** Stack error: Top() called on an Empty Stack\n";
+					std::cerr << "** Stack error: Top() called on an Empty Stack\n";
 				}
 				break;
 			case 'M': case 'm':
@@ -96,7 +96,7 @@ int main() {
 				else if (ofc == 'n' || ofc == 'N') ofc = '\n';
 				else
 				{
-					std::cout << " ** bad ofc: only 0, b|B, t|T, n|N accepted\n";
+					std::cerr << " ** bad ofc: only 0, b|B, t|T, n|N accepted\n";
 					break;
 				}
 				stack.SetOFC(ofc);
@@ -115,7 +115,7 @@ int main() {
 				stack.Dump(std::cout);
 				break;
 			default: 
-				std::cout << "\n** Unrecognized command -- please try again.\n";
+				std::cerr << "\n** Unrecognized command -- please try again.\n";
 				break;
 		}
 	}
