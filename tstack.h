@@ -142,6 +142,36 @@ namespace fsu {
 						os << data_[i];	
 					}
 				}
+				break;
+			case '\t':
+				if (size_ != 0) {
+					if (dir_ == 1)
+					{
+						size_t i = 0;
+						os << ofc_;
+						for (; i < (size_ - 1); ++i) {
+							os << data_[i];
+							os << ofc_;
+						}
+						os << data_[size_ - 1];
+						return;
+					} 
+					else if (dir_ == -1) 
+					{
+						size_t i = size_;
+						while (i > 0) {
+							--i;
+							os << ofc_;
+							os << data_[i];
+						}
+						return;
+					}
+					for (size_t i = 0; i < size_; ++i) {
+						os << ofc_;
+						os << data_[i];
+					}
+				}
+				break;
 	}
 
 	template<typename T, size_t N>
