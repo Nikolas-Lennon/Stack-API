@@ -12,7 +12,7 @@ namespace fsu {
 		void Push(const T& t); //push data
 		T Pop(); //pop data
 		T& Top(); // copy constructor
-		const T& Top() const; //copy constructor
+		const T& Top() const; // const copy constructor
 		size_t Size() const; // size of size_
 		size_t Capacity() const; //size of N
 		bool Empty() const; //bool check to see if data_ is empty
@@ -31,11 +31,11 @@ namespace fsu {
 
 
 	private:
-		const size_t capacity_;
-		T data_[N];
-		size_t size_;
-		char ofc_;
-		int dir_;
+		const size_t capacity_; //size of N
+		T data_[N]; //make an array of elements
+		size_t size_; // current size of the array
+		char ofc_; // determines if it will be displayed with a new line, no space, tab, or space
+		int dir_; // controls direction of stack to be displayed
 	};
 	
 	template < typename T, size_t N >
@@ -133,32 +133,65 @@ namespace fsu {
 			}
 			break;
 		case '\n':
-			if ((ofc_ == '\n') && (size_ != 0) || (dir_ == -1) || (dir_ == 1)) {
-				os << ofc_;
-				for (size_t i = 0; i < (size_ - 1); ++i) {
-					os << data_[i] << ofc_;
+			if (size_ != 0) {
+				if (dir_ == 1) {
+					os << ofc_;
+					for (size_t i = 0; i < (size_ - 1); ++i) {
+						os << data_[i] << ofc_;
+					}
+					os << data_[size_ - 1];
+					return;
+				} 
+				else if (dir_ == -1) {
+					os << ofc_;
+					for (size_t i = size_; i > 0; --i) {
+						os << data[size_ - 1] << ofc_;	
+					}
+					os << data_[size_];
+					return;
 				}
-				os << data_[size_ - 1];
-				return;
 			}
+			break;
 		case '\t':
-			if ((ofc_ == '\t') && (size_ != 0) || (dir_ == -1) || (dir_ == 1)) {
-				os << ofc_;
-				for (size_t i = 0; i < (size_ - 1); ++i) {
-					os << data_[i] << ofc_;
+			if ((size_ != 0) || (dir_ == -1) || (dir_ == 1)) {
+				
+				if (dir_ == 1) {
+					os << ofc_;
+					for (size_t i = 0; i < (size_ - 1); ++i) {
+						os << data_[i] << ofc_;
+					}
+					os << data_[size_ - 1];
+					return;
+				} 
+				else if (dir_ == -1)
+				{
+					os << ofc_;
+					for (size_t i = size_; i > 0; --i) {
+						os << ofc_;
+						os << data[size_ - 1] << ofc_;
+					}
+					os << data_[size_];
+					return;
 				}
-				os << data_[size_ - 1];
-				return;
 			}
+			break;
 		case ' ':
 		default:
 			if ((size_ != 0) || (dir_ == -1) || (dir_ == 1)) {
+				if (dir_ == 1) {
 				for (size_t i = 0; i < (size_ - 1); ++i) {
 					os << data_[i] << ' ';
 				}
 				os << data_[size_ - 1];
 				return;
-			}
+			} else if (dir_ == -1) {
+				for (size_t i = size_; i > 0; --i) {
+					os << ' ';
+					os << data[size_ - 1] << ' ';
+				}
+				os << data_[size_];
+				return;
+ 			}
 			break;
 		}
 
