@@ -114,90 +114,34 @@ namespace fsu {
 	void fsu::Stack<T, N>::Display(std::ostream & os) const
 	{
 		switch (ofc_) {
-		case '\0':
-			if (size_ != 0) {
-				if (dir_ == 1) {
-					for (size_t i = 0; i < (size_ - 1); ++i) {
-						os << data_[i];
-					}
-					os << data_[size_ - 1];
-					return;
-				}
-				else if (dir_ == -1) {
-					for (size_t i = size_; i > 0; --i) {
-						os << data_[i - 1];
-					}
-					os << data_[size_];
-					return;
-				}
-			}
-			break;
-		case '\n':
-			if (size_ != 0) {
-				if (dir_ == 1) {
-					os << ofc_;
-					for (size_t i = 0; i < (size_ - 1); ++i) {
-						os << data_[i] << ofc_;
-					}
-					os << data_[size_ - 1];
-					return;
-				} 
-				else if (dir_ == -1) {
-					os << ofc_;
-					for (size_t i = size_; i > 0; --i) {
-						os << data[size_ - 1] << ofc_;	
-					}
-					os << data_[size_];
-					return;
-				}
-			}
-			break;
-		case '\t':
-			if ((size_ != 0) || (dir_ == -1) || (dir_ == 1)) {
-				
-				if (dir_ == 1) {
-					os << ofc_;
-					for (size_t i = 0; i < (size_ - 1); ++i) {
-						os << data_[i] << ofc_;
-					}
-					os << data_[size_ - 1];
-					return;
-				} 
-				else if (dir_ == -1)
-				{
-					os << ofc_;
-					for (size_t i = size_; i > 0; --i) {
+			case '\n': 
+				if (size_ != 0) {
+					if (dir_ == 1) {
+						size_t i = 0;
 						os << ofc_;
-						os << data[size_ - 1] << ofc_;
+						for (; i < (size_ - 1); ++i)
+						{
+							os << data_[i];
+							os << ofc_;
+						}
+						os << data_[size_ - 1];
+						return;
 					}
-					os << data_[size_];
-					return;
+					else if (dir_ == -1)
+					{
+						size_t i = size_;
+						while (i > 0) {
+							--i;
+							os << ofc_;
+							os << data_[i];
+						}
+						return;
+					}
+					for (size_t i = 0; i < size_; ++i) {
+						os << ofc_;
+						os << data_[i];	
+					}
 				}
-			}
-			break;
-		case ' ':
-		default:
-			if ((size_ != 0) || (dir_ == -1) || (dir_ == 1)) {
-				if (dir_ == 1) {
-				for (size_t i = 0; i < (size_ - 1); ++i) {
-					os << data_[i] << ' ';
-				}
-				os << data_[size_ - 1];
-				return;
-			} else if (dir_ == -1) {
-				for (size_t i = size_; i > 0; --i) {
-					os << ' ';
-					os << data[size_ - 1] << ' ';
-				}
-				os << data_[size_];
-				return;
- 			}
-			break;
-		}
-
-		for (size_t i = 0; i < size_; ++i) {
-			os << data_[i];
-		}
 	}
 
 	template<typename T, size_t N>
