@@ -2,7 +2,6 @@
 #define TSTACK_H
 
 #include <iostream>
-#include <stack>
 
 namespace fsu {
   template < typename T, size_t N = 100>
